@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { typeOrmConfig } from './config/db/typeorm.config';
 import { ArticleModule } from './modules/article/article.module';
 import { UserModule } from './modules/user/user.module';
+import { PictureModule } from './modules/picture/picture.module';
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { UserModule } from './modules/user/user.module';
     typeOrmConfig,
     ArticleModule,
     UserModule,
+    PictureModule,
   ],
   controllers: [AppController],
   providers: [AppService],

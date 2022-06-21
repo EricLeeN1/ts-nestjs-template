@@ -5,6 +5,8 @@ import { AppModule } from './app.module';
 import { HttpExecptionFilter } from './filters/http-execption.filter';
 import { TransformInterceptor } from './interceptor/transform.interceptor';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { join } from 'path';
+import { uploadStaticSrc } from './config/upload/upload.config';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -12,6 +14,10 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalFilters(new HttpExecptionFilter());
   app.useGlobalInterceptors(new TransformInterceptor());
+
+  app.useStaticAssets(join(__dirname, '..', 'upload'), {
+    prefix: uploadStaticSrc,
+  });
 
   const options = new DocumentBuilder()
     .setTitle('hanlinhui-serve')

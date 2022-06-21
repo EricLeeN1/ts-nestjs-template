@@ -20,3 +20,13 @@ export function encryptPassword(password: string, salt: string): string {
     crypto.pbkdf2Sync(password, tempSalt, 10000, 16, 'sha1').toString('base64')
   );
 }
+
+/**
+ * 使用md5加密生成附件签名
+ * @param buffer
+ */
+export function encryptFileMD5(buffer: Buffer) {
+  const md5 = crypto.createHash('md5');
+
+  return md5.update(buffer).digest('hex');
+}
