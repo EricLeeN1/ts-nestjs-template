@@ -16,6 +16,7 @@ export class ArticleService {
     @InjectRepository(Article)
     private readonly articleRepository: Repository<Article>,
   ) {
+    console.log(this.articleRepository);
     this.list = [];
   }
 
@@ -73,7 +74,9 @@ export class ArticleService {
   // 更新文章
   async update(articleEditDTO: ArticleEditDTO) {
     const { id } = articleEditDTO;
-    const articleToUpdate = await this.articleRepository.findOne({ id });
+    const articleToUpdate = await this.articleRepository.findOne({
+      where: [{ id }],
+    });
     articleToUpdate.title = articleEditDTO.title;
     articleToUpdate.description = articleEditDTO.description;
     articleToUpdate.content = articleEditDTO.content;
@@ -86,7 +89,9 @@ export class ArticleService {
   // 删除文章
   async delete(idDTO: IdDTO) {
     const { id } = idDTO;
-    const articleToUpdate = await this.articleRepository.findOne({ id });
+    const articleToUpdate = await this.articleRepository.findOne({
+      where: [{ id }],
+    });
     articleToUpdate.isDelete = true;
     const result = await this.articleRepository.save(articleToUpdate);
     return {

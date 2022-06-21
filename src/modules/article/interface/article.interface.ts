@@ -1,5 +1,5 @@
 export interface Article {
-  id?: ''; // id
+  id: ''; // id
   title: ''; // 标题
   description: ''; // 描述
   content: ''; // content

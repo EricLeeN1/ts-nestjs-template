@@ -1,37 +1,45 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { ArticleService } from './article.service';
 import { ArticleCreateDTO } from './dto/article-create.dto';
 import { ArticleEditDTO } from './dto/article-edit.dto';
 import { IdDTO } from './dto/id.dto';
 import { ListDTO } from './dto/list.dto';
-import { Article } from './interface/article.interface';
+import { ArticleInfoResponse, ArticleInfoVO } from './vo/article-info.vo';
+import { ArticleListResponse, ArticleListVO } from './vo/article-list.vo';
 
+@ApiTags('文章模块')
 @Controller('article')
 export class ArticleController {
   constructor(private articleService: ArticleService) {}
 
   @Get('list')
-  getMore(@Query() listDTO: ListDTO) {
+  @ApiOkResponse({ description: '文章列表', type: ArticleListResponse })
+  getMore(@Query() listDTO: ListDTO): Promise<ArticleListVO> {
     return this.articleService.getMore(listDTO);
   }
 
   @Get('info')
-  getOne(@Query() idDto: IdDTO) {
+  @ApiOkResponse({ description: '文章详情', type: ArticleInfoResponse })
+  getOne(@Query() idDto: IdDTO): Promise<ArticleInfoVO> {
     return this.articleService.getOne(idDto);
   }
 
   @Post('create')
-  create(@Body() articleCreateDTO: ArticleCreateDTO) {
+  @ApiOkResponse({ description: '创建文章', type: ArticleInfoResponse })
+  create(@Body() articleCreateDTO: ArticleCreateDTO): Promise<ArticleInfoVO> {
     return this.articleService.create(articleCreateDTO);
   }
 
   @Post('edit')
-  update(@Body() articleEditDTO: ArticleEditDTO) {
+  @ApiOkResponse({ description: '编辑文章', type: ArticleInfoResponse })
+  update(@Body() articleEditDTO: ArticleEditDTO): Promise<ArticleInfoVO> {
     return this.articleService.update(articleEditDTO);
   }
 
   @Post('remove')
-  delete(@Body() idDto: IdDTO) {
+  @ApiOkResponse({ description: '删除文章', type: ArticleInfoResponse })
+  delete(@Body() idDto: IdDTO): Promise<ArticleInfoVO> {
     return this.articleService.delete(idDto);
   }
 }
