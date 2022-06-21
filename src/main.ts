@@ -17,6 +17,7 @@ async function bootstrap() {
     .setTitle('hanlinhui-serve')
     .setDescription('接口文档')
     .setVersion('1.0')
+    .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('swagger-doc', app, document);

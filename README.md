@@ -81,3 +81,7 @@ nest g co modules/article # 创建控制器
 nest g in interceptor/transform
 
 nest g f filters/httpExecption
+
+nest g mo modules/user
+nest g co modules/user
+nest g s modules/user
