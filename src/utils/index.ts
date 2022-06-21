@@ -18,7 +18,3 @@ export const getPagination = (
     pages,
   };
 };
-
-export const regMobileCN = (phone: string) => {
-  return phone;
-};

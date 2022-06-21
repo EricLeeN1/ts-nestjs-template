@@ -5,14 +5,9 @@ import { UserController } from './user.controller';
 import { UserService } from './user.service';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './jwt.strategy';
+import { jwtConstants } from 'src/config/jwt/jwt.config';
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([User]),
-    JwtModule.register({
-      secret: 'ericleeno1', // 密钥
-      signOptions: { expiresIn: '24h' }, // token 过期时效
-    }),
-  ],
+  imports: [TypeOrmModule.forFeature([User]), JwtModule.register(jwtConstants)],
   controllers: [UserController],
   providers: [UserService, JwtStrategy],
 })
